@@ -1,0 +1,8 @@
+.messages {
+   display: flex;
+   margin: 20px 20px;
+}
+
+.textOfMessages {
+   margin-left: 40px;
+}

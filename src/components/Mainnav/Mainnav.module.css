@@ -1,0 +1,19 @@
+.mainNav {
+   grid-area: mainnav;
+   background-color: skyblue;
+ }
+
+.list {
+   list-style: none;
+   padding: 0;
+   margin: 0 20px;
+}
+
+.list a {
+   color: white;
+   text-decoration: none;
+}
+
+.list a.activeLink {
+   color: black;
+}
