@@ -1,3 +1,6 @@
+Проект топорной социальной сети на React + Redux, делаю по курсу с ютуба. Пока только функциональность, в дизайн не ударялся от слова "совсем".
+
++++++++++++++++++++++
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
