@@ -6,3 +6,13 @@
 .textOfMessages {
    margin-left: 40px;
 }
+
+.textarea {
+   margin-top: 20px;
+   display: block;
+}
+
+.sendButton {
+   margin-left: 36px;
+   margin-top: 10px;
+}

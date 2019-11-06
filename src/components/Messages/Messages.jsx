@@ -2,10 +2,22 @@ import React from 'react';
 import styles from './Messages.module.css'
 import MessagesUser from './MessagesUser';
 import MessageItem from './MessageItem';
+import {addMessageAction, updateMessageAction} from '../../../src/redux/state'
 
 const Messages = (props) => {
    let messagesData = props.state.messagesData.map( element => <MessagesUser name={element.name} id={element.id}/>);
    let messagesElements = props.state.messagesElements.map(message => <MessageItem message = {message.item}/>);
+
+   let newMessage = React.createRef()
+
+   let updateMessage = () => {
+      let text = newMessage.current.value
+      props.dispatch(updateMessageAction(text))
+   }
+
+   let addMessage = () => {
+      props.dispatch(addMessageAction())
+   }
 
    return (
       <div className = {styles.messages}>
@@ -14,6 +26,15 @@ const Messages = (props) => {
          </div>   
          <div className = {styles.textOfMessages}>
             {messagesElements}
+            <div>
+               <textarea 
+                  ref = {newMessage} 
+                  class = {styles.textarea}
+                  onChange = {updateMessage}
+                  value = {props.state.currentMessage}
+               ></textarea>
+               <button class = {styles.sendButton} onClick = {addMessage}>Send the message</button>
+            </div>
          </div>
       </div>
    )

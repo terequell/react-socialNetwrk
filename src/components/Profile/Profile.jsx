@@ -9,7 +9,9 @@ const Profile = (props) => {
 
    return (
       <div className = {styles.maintext}>
-         <Profileinfo addPostItem = {props.addPostItem}/>
+         <Profileinfo 
+            dispatch = {props.dispatch} 
+            state = {props.state}/>
          {profileposts}
       </div>
    )

@@ -10,18 +10,24 @@ import Settings from './components/Settings/Settings.jsx';
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div className = "app-wrapper">
         <Header/>
         <Mainnav />
         <div className = 'mainContent'>
-          <Route /*exact*/ path='/messages' render={() => (<Messages state = {props.appState.messagesPage}/>)}/>
-          <Route /*exact*/ path='/profile' render={() => (<Profile state = {props.appState.profilePage} addPostItem = {props.addPostItem}/>)}/>
+          <Route /*exact*/ path='/messages' render={() => (
+            <Messages 
+              state = {props.appState.messagesPage}
+              dispatch = {props.dispatch}
+            />)}/>
+          <Route /*exact*/ path='/profile' render={() => (
+            <Profile 
+              state = {props.appState.profilePage} 
+              dispatch = {props.dispatch}
+            />)}/>
           <Route /*exact*/ path='/music' component = {Music}/>
           <Route /*exact*/ path='/settings' component = {Settings}/>
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 
