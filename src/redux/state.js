@@ -1,36 +1,9 @@
-const ADD_POST_ITEM = 'ADD-POST-ITEM'
-const UPDATE_POST = 'UPDATE-POST'
-const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_MESSAGE = 'UPDATE-MESSAGE'
+import messageReducer from './messageReducer'
+import profileReducer from './profileReducer'
 
-export const createAddPostAction = () => {
-   return {
-      type: 'ADD-POST-ITEM'
-   }
-}
-
-export const updatePost = (text) => {
-   return {
-      type: 'UPDATE-POST',
-      message: text
-   }
-}
-
-export const addMessageAction = () => {
-   return {
-      type: 'ADD-MESSAGE'
-   }
-}
-
-export const updateMessageAction = (text) => {
-   return {
-      type: 'UPDATE-MESSAGE',
-      message: text
-   }
-}
 
 let store  = {
-   reRenderEntireTree() {
+   _reRenderEntireTree() {
    },
    _state: {
       messagesPage:{
@@ -67,40 +40,15 @@ let store  = {
    },
 
    subscribe (observer){
-      this.reRenderEntireTree = observer
+      this._reRenderEntireTree = observer
    },
 
    dispatch(action) {
-      if (action.type === ADD_POST_ITEM) {
-         let newPost =  {
-            id: 6, 
-            text: this._state.profilePage.currentPost, 
-            likes: 0
-         };
-         this._state.profilePage.postsContent.push(newPost)
-         this._state.profilePage.currentPost = ''
-         this.reRenderEntireTree(this._state)
-      } 
+      this._state.messagesPage = messageReducer(this._state.messagesPage, action)
+      this._state.profilePage = profileReducer(this._state.profilePage, action)
 
-      else if (action.type === UPDATE_POST ) {
-         this._state.profilePage.currentPost = action.message
-         this.reRenderEntireTree(this._state)
-      } 
-      
-      else if (action.type === ADD_MESSAGE) {
-         let newMessage = {
-            id: 6,
-            item: this._state.messagesPage.currentMessage
-         }
-         this._state.messagesPage.messagesElements.push(newMessage)
-         this._state.messagesPage.currentMessage = ''
-         this.reRenderEntireTree(this._state)
-      }
+      this._reRenderEntireTree(this._state)
 
-      else if (action.type === UPDATE_MESSAGE) {
-         this._state.messagesPage.currentMessage = action.message
-         this.reRenderEntireTree(this._state)
-      }
    },
 } 
 
