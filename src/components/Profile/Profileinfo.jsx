@@ -1,16 +1,17 @@
 import React from 'react'
 import styles from './Profileinfoposts.module.css'
-import {createAddPostAction, updatePost} from '../../../src/redux/profileReducer'
+import Postitem from './Postitem'
 
 const Profileinfo = (props) => {
+   let profileposts = props.profilePage.postsContent.map(element => <Postitem text = {element.text} likes = {element.likes}/> );
 
    let changePost = (e) => {
       let text = e.target.value
-      props.dispatch(updatePost(text))
+      props.changePost(text)
    }
 
    let addPost = () => {
-      props.dispatch(createAddPostAction())
+      props.addPost()
    }
 
    return (
@@ -20,10 +21,11 @@ const Profileinfo = (props) => {
             <textarea 
                className = {styles.textarea} 
                onChange = {changePost} 
-               value = {props.state.currentPost}>
+               value = {props.profilePage.currentPost}>
             </textarea>
          </div> 
-         <button className = {styles.button} onClick = {addPost}>Send post</button>     
+         <button className = {styles.button} onClick = {addPost}>Send post</button>    
+         {profileposts} 
       </div>
    )
 }

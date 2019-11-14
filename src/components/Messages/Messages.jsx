@@ -2,20 +2,21 @@ import React from 'react';
 import styles from './Messages.module.css'
 import MessagesUser from './MessagesUser';
 import MessageItem from './MessageItem';
-import {addMessageAction, updateMessageAction} from '../../../src/redux/messageReducer'
+
 
 const Messages = (props) => {
-   let messagesData = props.state.messagesData.map( element => <MessagesUser name={element.name} id={element.id}/>);
-   let messagesElements = props.state.messagesElements.map(message => <MessageItem message = {message.item}/>);
+   console.log(props)
+   let messagesData = props.messagesPage.messagesData.map( element => <MessagesUser name={element.name} id={element.id}/>);
+   let messagesElements = props.messagesPage.messagesElements.map(message => <MessageItem message = {message.item}/>);
 
 
    let updateMessage = (e) => {
       let text = e.target.value
-      props.dispatch(updateMessageAction(text))
+      props.onUpdateMessage(text)
    }
 
    let addMessage = () => {
-      props.dispatch(addMessageAction())
+      props.onAddMessage()
    }
 
    return (
@@ -30,7 +31,7 @@ const Messages = (props) => {
                   placeholder = 'Enter your message'
                   class = {styles.textarea}
                   onChange = {updateMessage}
-                  value = {props.state.currentMessage}
+                  value = {props.currentMessage}
                ></textarea>
                <button class = {styles.sendButton} onClick = {addMessage}>Send the message</button>
             </div>

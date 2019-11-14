@@ -5,6 +5,7 @@ import profileReducer from './profileReducer'
 let store  = {
    _reRenderEntireTree() {
    },
+   
    _state: {
       messagesPage:{
          messagesData: [
