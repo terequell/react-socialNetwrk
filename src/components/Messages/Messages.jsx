@@ -6,8 +6,8 @@ import MessageItem from './MessageItem';
 
 const Messages = (props) => {
    console.log(props)
-   let messagesData = props.messagesPage.messagesData.map( element => <MessagesUser name={element.name} id={element.id}/>);
-   let messagesElements = props.messagesPage.messagesElements.map(message => <MessageItem message = {message.item}/>);
+   let messagesData = props.messagesPage.messagesData.map( element => <MessagesUser name={element.name} key={element.id}/>);
+   let messagesElements = props.messagesPage.messagesElements.map(message => <MessageItem message = {message.item} key = {message.id}/>);
 
 
    let updateMessage = (e) => {
@@ -16,6 +16,7 @@ const Messages = (props) => {
    }
 
    let addMessage = () => {
+      debugger
       props.onAddMessage()
    }
 
@@ -29,11 +30,11 @@ const Messages = (props) => {
             <div>
                <textarea 
                   placeholder = 'Enter your message'
-                  class = {styles.textarea}
+                  className = {styles.textarea}
                   onChange = {updateMessage}
-                  value = {props.currentMessage}
+                  value = {props.messagesPage.currentMessage}
                ></textarea>
-               <button class = {styles.sendButton} onClick = {addMessage}>Send the message</button>
+               <button className = {styles.sendButton} onClick = {addMessage}>Send the message</button>
             </div>
          </div>
       </div>

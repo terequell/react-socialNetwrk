@@ -3,15 +3,15 @@ import styles from './Profileinfoposts.module.css'
 import Postitem from './Postitem'
 
 const Profileinfo = (props) => {
-   let profileposts = props.profilePage.postsContent.map(element => <Postitem text = {element.text} likes = {element.likes}/> );
+   let profileposts = props.profilePage.postsContent.map(element => <Postitem text = {element.text} likes = {element.likes} key = {element.id}/> )
 
    let changePost = (e) => {
       let text = e.target.value
-      props.changePost(text)
+      props.onChangePost(text)
    }
 
    let addPost = () => {
-      props.addPost()
+      props.onAddPost()
    }
 
    return (
@@ -21,7 +21,8 @@ const Profileinfo = (props) => {
             <textarea 
                className = {styles.textarea} 
                onChange = {changePost} 
-               value = {props.profilePage.currentPost}>
+               value = {props.profilePage.currentPost}
+               >
             </textarea>
          </div> 
          <button className = {styles.button} onClick = {addPost}>Send post</button>    

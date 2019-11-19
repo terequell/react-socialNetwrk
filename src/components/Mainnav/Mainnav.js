@@ -9,6 +9,7 @@ function Mainnav (props) {
          <ul className = {styles.list}>
             <li><NavLink to = '/profile' activeClassName={styles.activeLink}>My page</NavLink></li>
             <li><NavLink to = '/messages' activeClassName={styles.activeLink}>Messages</NavLink></li>
+            <li><NavLink to = '/users' activeClassName = {styles.activeLink}>Users</NavLink></li>
             <li><NavLink to = '/music' activeClassName={styles.activeLink}>Music</NavLink></li>
             <li><NavLink to = '/settings' activeClassName={styles.activeLink}>Settings</NavLink></li>
          </ul>
