@@ -4,3 +4,13 @@
    border-radius: 50%;
    margin-right: 10px;
 }
+
+.currentPage {
+   font-weight: bold;
+   cursor: pointer;
+}
+
+.numberOfPage {
+   margin-right: 3px;
+   cursor: pointer;
+}

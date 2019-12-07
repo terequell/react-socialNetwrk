@@ -19,3 +19,23 @@
    margin-left: 167px;
 }
 
+.largePhoto {
+   display: block;
+  
+}
+
+.largePhotoDiv {
+   display: block;
+}
+
+.userProfileDescription {
+   display: flex;
+   width: 800px;
+   padding-bottom: 50px;
+   margin: 0 auto;
+}
+
+.description {
+   margin-left: 50px;
+}
+

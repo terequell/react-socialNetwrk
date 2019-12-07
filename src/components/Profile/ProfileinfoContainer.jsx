@@ -1,6 +1,25 @@
+import React from 'react'
 import {connect} from 'react-redux'
 import Profileinfo from './Profileinfo'
-import {AddPostAction, updatePostAction} from '../../redux/profileReducer'
+import {AddPostAC, updatePostAC, setCurrentUserAC} from '../../redux/profileReducer'
+import * as axios from 'axios'
+import {withRouter} from 'react-router-dom'
+import {getUserPage} from '../api/requests'
+
+class ProfileinfoContainer extends React.Component {
+   componentDidMount() {
+      getUserPage(this.props.match.params.userId)
+         .then((response) => {
+            this.props.setCurrentUser(response.data)
+         })
+   }
+
+   render() {
+      return (
+         <Profileinfo {...this.props}/>
+      )
+   }
+}
 
 let mapStateToProps = (state) => {
    return {
@@ -11,14 +30,16 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
    return {
       onChangePost:(text) => {
-         dispatch(updatePostAction(text))
+         dispatch(updatePostAC(text))
       },
       onAddPost: () => {
-         dispatch(AddPostAction())
+         dispatch(AddPostAC())
+      },
+      setCurrentUser: (user) => {
+         dispatch(setCurrentUserAC(user))
       }
    }
 }
 
-const ProfileinfoContainer = connect(mapStateToProps, mapDispatchToProps)(Profileinfo)
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileinfoContainer))
 
-export default ProfileinfoContainer

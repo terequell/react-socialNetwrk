@@ -1,5 +1,6 @@
 const UPDATE_POST = 'UPDATE-POST'
 const ADD_POST = 'ADD-POST'
+const SET_CURRENT_USER = 'SET-CURRENT-USER'
 
 let initialState = {
    postsContent: [
@@ -8,6 +9,7 @@ let initialState = {
       {id: 3, likes: 2, text: 'Third post'}
    ],
    currentPost: '',
+   currentUser: null
 
 }
 
@@ -31,21 +33,35 @@ const profileReducer = (state = initialState, action) => {
             currentPost: action.text
          }
       }
+
+      case SET_CURRENT_USER: {
+         return {
+            ...state,
+            currentUser: action.user
+         }
+      }
       default: 
          return state
    }
 }
 
-export const AddPostAction = () => {
+export const AddPostAC = () => {
    return ({
       type: ADD_POST
    })
 }
 
-export const updatePostAction = (text) => {
+export const updatePostAC = (text) => {
    return ({
       type: UPDATE_POST,
       text: text
+   })
+}
+
+export const setCurrentUserAC = (user) => {
+   return ({
+      type: SET_CURRENT_USER,
+      user: user
    })
 }
 

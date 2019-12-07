@@ -6,3 +6,7 @@
  .img {
    width: 700px;
  }
+
+ .loginButton {
+   float: right;
+ }

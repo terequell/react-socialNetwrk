@@ -1,7 +1,6 @@
 import messageReducer from './messageReducer'
 import profileReducer from './profileReducer'
 
-
 let store  = {
    _reRenderEntireTree() {
    },
@@ -49,10 +48,7 @@ let store  = {
       this._state.profilePage = profileReducer(this._state.profilePage, action)
 
       this._reRenderEntireTree(this._state)
-
    },
 } 
-
-
  
 export default store  
