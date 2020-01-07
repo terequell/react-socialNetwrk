@@ -1,24 +1,24 @@
 import Messages from './Messages'
-import {addMessageAction, updateMessageAction} from '../../redux/messageReducer'
+import {addMessageAction} from '../../redux/messageReducer'
 import {connect} from 'react-redux'
+import withCheckLogin from '../HOC/withCheckLogin'
+import { compose } from 'redux'
 
 let mapStateToProps = (state) => {
    return {
-      messagesPage: state.messagesPage
+      messagesPage: state.messagesPage,
    }
 }
 
 let mapDispatchToProps = (dispatch) => {
    return {
-      onUpdateMessage: (text) => {
-         dispatch(updateMessageAction(text))
-      },
-      onAddMessage: () => {
-         dispatch(addMessageAction())
+      onAddMessage: (text) => {
+         dispatch(addMessageAction(text))
       }
    }
 }
 
-const MessagesContainer = connect(mapStateToProps, mapDispatchToProps)(Messages)
-
-export default MessagesContainer;
+export default compose(
+   connect(mapStateToProps, mapDispatchToProps),
+   withCheckLogin
+)(Messages)

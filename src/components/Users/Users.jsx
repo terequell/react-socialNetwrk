@@ -3,7 +3,6 @@ import styles from './Users.module.css'
 import defaultUserPhoto from '../../assets/img/defaultUserPic.png'
 import Loading from '../common/Loading'
 import {NavLink} from 'react-router-dom'
-import {startFollowUserRequest, toUnfollowUserRequest} from '../api/requests'
 
 const Users = (props) => {
       let pagesCount = Math.ceil(props.totalCount/props.usersOnPage)
@@ -31,27 +30,10 @@ const Users = (props) => {
                <div>
                   {user.followed ? 
                   <button disabled = {props.triedFollow.some(id => id === user.id)} onClick = {() => {
-                     props.tryFollow(true, user.id)
-                     toUnfollowUserRequest(user.id)
-                        .then(response => {
-                           if (response.data.resultCode === 0) {
-                              props.unFollow(user.id)
-                              props.tryFollow(false, user.id)
-                           }
-                        })
-                     
+                        props.unfollowUser(user.id)   
                      }}>UnFollow</button> 
                   : <button disabled = {props.triedFollow.some(id => id === user.id)} onClick = {() => {       
-                     props.tryFollow(true, user.id)            
-                     startFollowUserRequest(user.id)
-                        .then(response => {
-                           if (response.data.resultCode === 0) {
-                              props.follow(user.id)
-                              props.tryFollow(false, user.id)
-                              
-                           }
-                        })
-                     
+                        props.followUser(user.id)
                      }}>Follow</button> 
                   }
                </div>

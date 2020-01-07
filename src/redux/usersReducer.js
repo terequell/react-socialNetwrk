@@ -1,4 +1,4 @@
-import {getUsersFromServer} from '../components/api/requests'
+import {usersAPI} from '../components/api/requests'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -87,11 +87,34 @@ export const tryFollowAC = (TFBool, userId) => ({type: TRY_FOLLOW, TFBool, userI
 
 export const getUsersTnunkCreator = (usersOnPage, currentPage) => (dispatch) => {
    dispatch(setLoadingFlagAC(true))
-   getUsersFromServer(usersOnPage, currentPage)
+   usersAPI.getUsersFromServer(usersOnPage, currentPage)
       .then(response => {
+         dispatch(changePageAC(currentPage))
          dispatch(setTotalCountAC(response.data.totalCount))
          dispatch(setUsersAC(response.data.items))
          dispatch(setLoadingFlagAC(false))
+      })
+}
+
+export const UnfollowUserThunkCreator = (userId) => (dispatch) => {
+   dispatch(tryFollowAC(true, userId))
+   usersAPI.toUnfollowUserRequest(userId)
+      .then(response => {
+         if (response.data.resultCode === 0) {
+            dispatch(unFollowAC(userId))
+            dispatch(tryFollowAC(false, userId))
+         }
+      })
+}
+
+export const FollowUserThunkCreator = (userId) => (dispatch) => {
+   dispatch(tryFollowAC(true, userId))
+   usersAPI.startFollowUserRequest(userId)
+      .then(response => {
+         if (response.data.resultCode === 0) {
+            dispatch(followAC(userId))
+            dispatch(tryFollowAC(false, userId))
+         }
       })
 }
 

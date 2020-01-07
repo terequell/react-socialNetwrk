@@ -8,6 +8,7 @@ import {Route} from 'react-router-dom';
 import Music from './components/Music/Music.jsx';
 import Settings from './components/Settings/Settings.jsx';
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/Login'
 
 const App = (props) => {
   return (
@@ -15,6 +16,9 @@ const App = (props) => {
         <HeaderContainer/>
         <Mainnav />
         <div className = 'mainContent'>
+          <Route path = '/login' render = {() => (
+            <Login/>
+          )}/>
           <Route /*exact*/ path='/messages' render={() => (
             <MessagesContainer 
             />)}/>

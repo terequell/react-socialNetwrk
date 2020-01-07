@@ -1,16 +1,16 @@
 import Users from './Users'
 import {connect} from 'react-redux'
-import {followAC, unFollowAC, getUsersTnunkCreator, changePageAC, setLoadingFlagAC, tryFollowAC} from '../../redux/usersReducer'
+import {followAC, unFollowAC, getUsersTnunkCreator, changePageAC, setLoadingFlagAC, tryFollowAC, UnfollowUserThunkCreator, FollowUserThunkCreator} from '../../redux/usersReducer'
 import React from 'react'
+import withCheckLogin from '../HOC/withCheckLogin'
+import { compose } from 'redux'
 
-class UsersContainer extends React.Component {
-
+class UsersContainer extends React.Component {  
    componentDidMount() {
       this.props.getUsersTnunkCreator(this.props.usersOnPage, this.props.currentPage)
    }
 
    changeUsers = (pageNumber) => {
-      debugger
       this.props.getUsersTnunkCreator(this.props.usersOnPage, pageNumber)
    }
 
@@ -26,11 +26,12 @@ class UsersContainer extends React.Component {
          isLoading = {this.props.isLoading}
          tryFollow = {this.props.tryFollow}
          triedFollow = {this.props.triedFollow}
+         unfollowUser = {this.props.unFollowUserThunkCreator}
+         followUser = {this.props.FollowUserThunkCreator}
+         isAuth = {this.props.isAuth}
       />
    }
 }
-   
-
 
 let mapStateToProps = (state) => {
    return {
@@ -39,7 +40,8 @@ let mapStateToProps = (state) => {
       currentPage: state.usersPage.currentPage,
       totalCount: state.usersPage.totalCount,
       isLoading: state.usersPage.isLoading,
-      triedFollow: state.usersPage.triedFollow
+      triedFollow: state.usersPage.triedFollow,
+      isAuth: state.header.isAuth
    }
 }
 
@@ -67,8 +69,19 @@ let mapDispatchToProps = (dispatch) => {
 
      getUsersTnunkCreator: (usersOnPage, currentPage) => {
         dispatch(getUsersTnunkCreator(usersOnPage, currentPage))
+     },
+
+     unFollowUserThunkCreator: (userId) => {
+        dispatch(UnfollowUserThunkCreator(userId))
+     },
+
+     FollowUserThunkCreator: (userId) => {
+        dispatch(FollowUserThunkCreator(userId))
      }
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default compose(
+   withCheckLogin,
+   connect(mapStateToProps, mapDispatchToProps)
+   )(UsersContainer)

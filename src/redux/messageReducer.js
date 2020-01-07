@@ -1,5 +1,4 @@
 const ADD_MESSAGE = 'ADD-MESSAGE'
-const UPDATE_MESSAGE = 'UPDATE-MESSAGE'
 
 let initialState = {
    messagesData: [
@@ -16,28 +15,20 @@ let initialState = {
       {id:4, item:'message3'},
       {id:5, item:'message5'},
    ],
-   currentMessage: '',
 }
 
 const messageReducer = (state = initialState, action) => {
    switch (action.type) {
       case(ADD_MESSAGE): {
          let newMessage = {
-            id: 6,
-            item: state.currentMessage,
+            id: state.messagesElements.length + 1,
+            item: action.text,
          }
 
          return {
             ...state,
             messagesElements: [...state.messagesElements, newMessage],
-            currentMessage: ''
-         }
-      }
-      
-      case (UPDATE_MESSAGE): {
-         return {
-            ...state,
-            currentMessage : action.text
+
          }
       }
 
@@ -46,16 +37,9 @@ const messageReducer = (state = initialState, action) => {
    }
 }
 
-export const addMessageAction = () => {
+export const addMessageAction = (text) => {
    return ({
       type: ADD_MESSAGE,
-   })
-   
-}
-
-export const updateMessageAction = (text) => {
-   return ({
-      type: UPDATE_MESSAGE,
       text: text
    })
 }

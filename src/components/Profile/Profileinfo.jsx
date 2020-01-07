@@ -2,7 +2,9 @@ import React from 'react'
 import styles from './Profileinfoposts.module.css'
 import Postitem from './Postitem'
 import Loading from '../common/Loading'
+import Profilestatus from './Profilestatus'
 import defaultUserPhoto from '../../assets/img/defaultUserPic.png'
+import { Field, reduxForm } from 'redux-form'
 
 const Profileinfo = (props) => {
    let profileposts = props.profilePage.postsContent.map(element => 
@@ -12,18 +14,11 @@ const Profileinfo = (props) => {
       likes = {element.likes} 
       key = {element.id}
       /> )
-
-   let changePost = (e) => {
-      let text = e.target.value
-      props.onChangePost(text)
-   }
-
-   let addPost = () => {
-      props.onAddPost()
+   let addNewPost = (formData) => {
+      props.onAddPost(formData.newPostText)
    }
 
    let currentUser = props.profilePage.currentUser
-   console.log(currentUser)
 
    if (!currentUser) {
         return (
@@ -36,6 +31,7 @@ const Profileinfo = (props) => {
                <div className = {styles.userProfileDescription}>
                   <img className = {styles.largePhoto} src = {currentUser.photos.large}/>
                   <div className = {styles.description}>
+                     Status:<Profilestatus status = {props.status} updateStatus = {props.updateUserStatus}/>
                      FullName: {currentUser.fullName} 
                      {currentUser.lookingForAJob ? <p>I'm looking for a job now :)</p> : <p>I have a job now, sorry :(</p>}
                      <p>My contacts:</p> 
@@ -45,18 +41,23 @@ const Profileinfo = (props) => {
                   </div>
                </div>
                <img className = {styles.avatar} src = {props.profilePage.currentUser.photos.small}/>
-               <textarea 
-                  className = {styles.textarea} 
-                  onChange = {changePost} 
-                  value = {props.profilePage.currentPost}
-                  >
-               </textarea>
-            </div> 
-            <button className = {styles.button} onClick = {addPost}>Send post</button>    
+               <AddPostReduxForm onSubmit = {addNewPost}/>
+            </div>     
             {profileposts} 
          </div>
          )
       }
    }
+
+const AddPostForm = (props) => {
+   return (
+      <form onSubmit = {props.handleSubmit}>
+         <Field className = {styles.textarea}  name = 'newPostText' component = 'textarea' type = 'text'/>
+         <button className = {styles.button}>Add new post</button>
+      </form>
+   )
+}
+
+const AddPostReduxForm = reduxForm({form:'addNewMessage'})(AddPostForm)
 
 export default Profileinfo

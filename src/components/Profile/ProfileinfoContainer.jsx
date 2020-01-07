@@ -1,17 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Profileinfo from './Profileinfo'
-import {AddPostAC, updatePostAC, setCurrentUserAC} from '../../redux/profileReducer'
-import * as axios from 'axios'
+import {AddPostAC, getCurrentUserThunkCreator,getCurrentUserStatusThunkCreator, updateUserStatusThunkCreator} from '../../redux/profileReducer'
 import {withRouter} from 'react-router-dom'
-import {getUserPage} from '../api/requests'
+import { compose } from 'redux'
 
 class ProfileinfoContainer extends React.Component {
    componentDidMount() {
-      getUserPage(this.props.match.params.userId)
-         .then((response) => {
-            this.props.setCurrentUser(response.data)
-         })
+      let userId = this.props.match.params.userId
+
+      if (!userId) {
+         userId = 5210
+      } 
+      this.props.setCurrentUserThunk(userId) 
+      this.props.getUserStatus(userId)
    }
 
    render() {
@@ -23,23 +25,31 @@ class ProfileinfoContainer extends React.Component {
 
 let mapStateToProps = (state) => {
    return {
-      profilePage: state.profilePage
+      profilePage: state.profilePage,
+      status: state.profilePage.currentUserStatus
    }
 }
 
 let mapDispatchToProps = (dispatch) => {
    return {
-      onChangePost:(text) => {
-         dispatch(updatePostAC(text))
+      onAddPost: (text) => {
+         dispatch(AddPostAC(text))
       },
-      onAddPost: () => {
-         dispatch(AddPostAC())
+      setCurrentUserThunk: (userId) => {
+         dispatch(getCurrentUserThunkCreator(userId))
       },
-      setCurrentUser: (user) => {
-         dispatch(setCurrentUserAC(user))
+      getUserStatus: (userId) => {
+         dispatch(getCurrentUserStatusThunkCreator(userId))
+      },
+      updateUserStatus: (status) => {
+         dispatch(updateUserStatusThunkCreator(status))
       }
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileinfoContainer))
+export default compose(
+   connect(mapStateToProps, mapDispatchToProps),
+   withRouter
+)(ProfileinfoContainer)
+
 
