@@ -1,0 +1,8 @@
+.loginForm {
+   box-sizing: border-box;
+   margin: 30px;
+}  
+
+.error {
+   color: red;
+}

@@ -4,14 +4,16 @@ import Profileinfo from './Profileinfo'
 import {AddPostAC, getCurrentUserThunkCreator,getCurrentUserStatusThunkCreator, updateUserStatusThunkCreator} from '../../redux/profileReducer'
 import {withRouter} from 'react-router-dom'
 import { compose } from 'redux'
+import withCheckLogin from '../HOC/withCheckLogin'
 
 class ProfileinfoContainer extends React.Component {
    componentDidMount() {
       let userId = this.props.match.params.userId
-
+      
       if (!userId) {
-         userId = 5210
+         userId = this.props.myId
       } 
+
       this.props.setCurrentUserThunk(userId) 
       this.props.getUserStatus(userId)
    }
@@ -26,7 +28,8 @@ class ProfileinfoContainer extends React.Component {
 let mapStateToProps = (state) => {
    return {
       profilePage: state.profilePage,
-      status: state.profilePage.currentUserStatus
+      status: state.profilePage.currentUserStatus,
+      myId: state.header.id
    }
 }
 
@@ -49,7 +52,8 @@ let mapDispatchToProps = (dispatch) => {
 
 export default compose(
    connect(mapStateToProps, mapDispatchToProps),
-   withRouter
+   withRouter,
+   withCheckLogin
 )(ProfileinfoContainer)
 
 

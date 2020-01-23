@@ -4,7 +4,7 @@ import Postitem from './Postitem'
 import Loading from '../common/Loading'
 import Profilestatus from './Profilestatus'
 import defaultUserPhoto from '../../assets/img/defaultUserPic.png'
-import { Field, reduxForm } from 'redux-form'
+import AddPostReduxForm from './ProfileForms'
 
 const Profileinfo = (props) => {
    let profileposts = props.profilePage.postsContent.map(element => 
@@ -13,7 +13,8 @@ const Profileinfo = (props) => {
       text = {element.text} 
       likes = {element.likes} 
       key = {element.id}
-      /> )
+      />)
+
    let addNewPost = (formData) => {
       props.onAddPost(formData.newPostText)
    }
@@ -48,16 +49,5 @@ const Profileinfo = (props) => {
          )
       }
    }
-
-const AddPostForm = (props) => {
-   return (
-      <form onSubmit = {props.handleSubmit}>
-         <Field className = {styles.textarea}  name = 'newPostText' component = 'textarea' type = 'text'/>
-         <button className = {styles.button}>Add new post</button>
-      </form>
-   )
-}
-
-const AddPostReduxForm = reduxForm({form:'addNewMessage'})(AddPostForm)
 
 export default Profileinfo

@@ -3,6 +3,7 @@ import messageReducer from './messageReducer'
 import profileReducer from './profileReducer'
 import usersReducer from './usersReducer'
 import headerReducer from './headerReducer'
+import appReducer from './appReducer'
 import thunkMW from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 
@@ -11,7 +12,8 @@ let reducers = combineReducers({
    messagesPage: messageReducer,
    usersPage: usersReducer,
    header: headerReducer,
-   form: formReducer
+   form: formReducer,
+   app: appReducer,
 })
 
 let store = createStore(reducers, applyMiddleware(thunkMW))
