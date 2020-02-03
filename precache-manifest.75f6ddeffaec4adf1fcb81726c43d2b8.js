@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "5cc0c5b3ad02164f73c0e3a5ab96d879",
+    "revision": "bbd3a88a87749aae7bf03852c0750212",
     "url": "/react-redux-socialnetwork/index.html"
   },
   {
-    "revision": "bec6758fe4528e9e71fe",
+    "revision": "9f89c709de1d51647970",
     "url": "/react-redux-socialnetwork/static/css/3.f698cecd.chunk.css"
   },
   {
-    "revision": "afd2d69d76db9dbf3944",
+    "revision": "dd7b7f4ae2c523c0b33e",
     "url": "/react-redux-socialnetwork/static/css/4.f698cecd.chunk.css"
   },
   {
@@ -20,20 +20,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-redux-socialnetwork/static/css/6.cbd1bb53.chunk.css"
   },
   {
-    "revision": "bec8d296bff7487a1ae1",
+    "revision": "032544b98b7bf3cc1bf9",
     "url": "/react-redux-socialnetwork/static/css/main.bf6df654.chunk.css"
   },
   {
-    "revision": "2574f4aac1d04860c1ff",
-    "url": "/react-redux-socialnetwork/static/js/2.43aa3d8e.chunk.js"
+    "revision": "d337193e8f59e613e669",
+    "url": "/react-redux-socialnetwork/static/js/2.c96f0f3b.chunk.js"
   },
   {
-    "revision": "bec6758fe4528e9e71fe",
-    "url": "/react-redux-socialnetwork/static/js/3.960832d3.chunk.js"
+    "revision": "9f89c709de1d51647970",
+    "url": "/react-redux-socialnetwork/static/js/3.7775a182.chunk.js"
   },
   {
-    "revision": "afd2d69d76db9dbf3944",
-    "url": "/react-redux-socialnetwork/static/js/4.582bd436.chunk.js"
+    "revision": "dd7b7f4ae2c523c0b33e",
+    "url": "/react-redux-socialnetwork/static/js/4.71a21061.chunk.js"
   },
   {
     "revision": "4101de15eff04dd17474",
@@ -44,11 +44,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-redux-socialnetwork/static/js/6.cc505356.chunk.js"
   },
   {
-    "revision": "bec8d296bff7487a1ae1",
-    "url": "/react-redux-socialnetwork/static/js/main.464dc189.chunk.js"
+    "revision": "032544b98b7bf3cc1bf9",
+    "url": "/react-redux-socialnetwork/static/js/main.64298b01.chunk.js"
   },
   {
-    "revision": "4d00a7bdd5da9fd82ef9",
-    "url": "/react-redux-socialnetwork/static/js/runtime-main.54cb691e.js"
+    "revision": "bb95389cbf0c3e5ccb89",
+    "url": "/react-redux-socialnetwork/static/js/runtime-main.e862e68b.js"
   }
 ]);
