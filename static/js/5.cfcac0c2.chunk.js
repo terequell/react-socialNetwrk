@@ -1,0 +1,2 @@
+(this["webpackJsonpmy-app"]=this["webpackJsonpmy-app"]||[]).push([[5],{291:function(t,e,n){t.exports={text:"Music_text__3x0Rs"}},293:function(t,e,n){"use strict";n.r(e);var s=n(0),a=n.n(s),p=n(291),c=n.n(p);e.default=function(t){return a.a.createElement("div",{className:c.a.text},"\u0417\u0434\u0435\u0441\u044c \u043a\u043e\u0433\u0434\u0430-\u0442\u043e \u0431\u0443\u0434\u0435\u0442 \u043c\u0443\u0437\u044b\u043a\u0430")}}}]);
+//# sourceMappingURL=5.cfcac0c2.chunk.js.map

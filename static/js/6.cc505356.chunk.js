@@ -1,0 +1,2 @@
+(this["webpackJsonpmy-app"]=this["webpackJsonpmy-app"]||[]).push([[6],{292:function(t,e,n){t.exports={text:"Settings_text__1ghUx"}},294:function(t,e,n){"use strict";n.r(e);var a=n(0),s=n.n(a),p=n(292),c=n.n(p);e.default=function(t){return s.a.createElement("div",{className:c.a.text},"\u0417\u0434\u0435\u0441\u044c \u043a\u043e\u0433\u0434\u0430-\u0442\u043e \u0431\u0443\u0434\u0443\u0442 \u043d\u0430\u0441\u0442\u0440\u043e\u0439\u043a\u0438")}}}]);
+//# sourceMappingURL=6.cc505356.chunk.js.map
