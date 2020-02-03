@@ -1,5 +1,7 @@
 Задеплоено: https://terequell.github.io/react-redux-socialnetwork
+
 Логин и пароль для входа:
+
 Email: free@samuraijs.com
 Password: free
 
