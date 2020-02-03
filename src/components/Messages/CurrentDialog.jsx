@@ -12,7 +12,7 @@ const CurrentDialog = React.memo((props) => {
    const {userId} = useParams();
 
    useEffect(() => {
-      props.getMessagesWithUserThunkCreator(userId)
+      setInterval(() => props.getMessagesWithUserThunkCreator(userId), 7000)
    }, [userId])
 
    const getNewMessage = (formData) => {
@@ -25,7 +25,7 @@ const CurrentDialog = React.memo((props) => {
       <div className = {styles.current__dialog__block}>
          <p className = {styles.dialog__name}>Dialog with id {userId} </p>
          <div>
-            {props.changingMessagesFlag ? <Loading/> : props.messages.map(element => <div><p>{element.senderName}:{element.body}</p></div>)}
+            {props.changingMessagesFlag ? null : props.messages.map(element => <div><p>{element.senderName}:{element.body}</p></div>)}
          </div>
          <div>
             <AddMessageForm onSubmit = {getNewMessage}/>

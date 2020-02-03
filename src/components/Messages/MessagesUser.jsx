@@ -12,8 +12,8 @@ const MessagesUser = (props) => {
             <div className = {styles.user__info}>
                <p className = {styles.user__name}>Nickname: {props.name}</p>
                {props.hasNewMessages ?
-                  <p>check a new message</p> 
-                  : <p>No new message</p>}
+                  <p>You have new messages</p> 
+                  : <p>You dont have new messages</p>}
             </div>
          </div>
       </NavLink>
