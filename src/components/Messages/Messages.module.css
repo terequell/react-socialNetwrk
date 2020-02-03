@@ -3,6 +3,10 @@
    margin: 20px 20px;
 }
 
+.users__list{
+   width: 30%;
+}
+
 .textOfMessages {
    margin-left: 40px;
 }
@@ -15,4 +19,31 @@
 .sendButton {
    margin-left: 36px;
    margin-top: 10px;
+}
+
+.messagesuser__item{
+   margin-bottom: 30px;
+}
+
+.user__content{
+   display: flex;
+   margin-bottom: 30px;
+   border: 3px solid blue;
+}
+
+.user__info {
+   margin-left: 10px;
+}
+
+.user__avatar {
+   width: 70px;
+}
+
+.user__name {
+   color: black;
+}
+
+.dialog__name{
+   font-size: 20px;
+   background-color: white;
 }

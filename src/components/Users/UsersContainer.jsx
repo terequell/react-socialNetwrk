@@ -1,5 +1,6 @@
 import Users from './Users'
 import {connect} from 'react-redux'
+import {startDialogThunkCreator} from '../../redux/dialogsReducer'
 import {followAC, unFollowAC, getUsersTnunkCreator, changePageAC, setLoadingFlagAC, tryFollowAC, UnfollowUserThunkCreator, FollowUserThunkCreator} from '../../redux/usersReducer'
 import React from 'react'
 import withCheckLogin from '../HOC/withCheckLogin'
@@ -14,6 +15,10 @@ class UsersContainer extends React.Component {
       this.props.getUsersTnunkCreator(this.props.usersOnPage, pageNumber)
    }
 
+   startDialogWithUser = (userId) => {
+      this.props.startDialogThunkCreator(userId)
+   }
+
    render = () => {
       return <Users 
          totalCount = {this.props.totalCount}
@@ -21,19 +26,20 @@ class UsersContainer extends React.Component {
          changeUsers = {this.changeUsers}
          currentPage = {this.props.currentPage}
          users = {this.props.users}
-         follow = {this.props.follow}
-         unFollow = {this.props.unFollow}
+         follow = {this.props.followAC}
+         unFollow = {this.props.unFollowAC}
          isLoading = {this.props.isLoading}
-         tryFollow = {this.props.tryFollow}
+         tryFollow = {this.props.tryFollowAC}
          triedFollow = {this.props.triedFollow}
-         unfollowUser = {this.props.unFollowUserThunkCreator}
+         unfollowUser = {this.props.UnfollowUserThunkCreator}
          followUser = {this.props.FollowUserThunkCreator}
          isAuth = {this.props.isAuth}
+         startDialogWithUser = {this.startDialogWithUser}
       />
    }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
    return {
       users: state.usersPage.users,
       usersOnPage: state.usersPage.usersOnPage,
@@ -45,43 +51,7 @@ let mapStateToProps = (state) => {
    }
 }
 
-let mapDispatchToProps = (dispatch) => {
-   return {
-     follow: (userId) => {
-      dispatch(followAC(userId))
-     },
-
-     unFollow: (userId) => {
-      dispatch(unFollowAC(userId))
-     },
-
-     changePage: (pageNum) => {
-        dispatch(changePageAC(pageNum))
-     }, 
-
-     setLoadingFlag: (loadingFlag) => {
-        dispatch(setLoadingFlagAC(loadingFlag))
-     },
-
-     tryFollow: (TFBool, userId) => {
-        dispatch(tryFollowAC(TFBool, userId))
-     },
-
-     getUsersTnunkCreator: (usersOnPage, currentPage) => {
-        dispatch(getUsersTnunkCreator(usersOnPage, currentPage))
-     },
-
-     unFollowUserThunkCreator: (userId) => {
-        dispatch(UnfollowUserThunkCreator(userId))
-     },
-
-     FollowUserThunkCreator: (userId) => {
-        dispatch(FollowUserThunkCreator(userId))
-     }
-   }
-}
-
 export default compose(
    withCheckLogin,
-   connect(mapStateToProps, mapDispatchToProps)
+   connect(mapStateToProps, {startDialogThunkCreator, followAC, unFollowAC, getUsersTnunkCreator, changePageAC, setLoadingFlagAC, tryFollowAC, UnfollowUserThunkCreator, FollowUserThunkCreator})
    )(UsersContainer)

@@ -2,3 +2,9 @@
    color: red;
    font-size: 20px;
 }
+
+.about__block {
+   margin-top: 10px;
+   border: 1px solid black;
+}
+

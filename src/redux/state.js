@@ -26,8 +26,8 @@ let store  = {
       profilePage:{
          postsContent:[
             {id:1, text: 'Sample text im my future socialnetwork', likes: 12},
-            {id:2, text: 'Privet ti cho ', likes: 11},
-            {id:3, text: 'Im the culturest man in the world', likes: 126},
+            {id:2, text: 'Second message', likes: 11},
+            {id:3, text: 'Third message', likes: 126},
             {id:4, text: 'hgdfhdfghdhcfghjdfg', likes: 8},
             {id:5, text: 'gnsdfj;gkhs;rgn;djfkhgsdf', likes: 8},
          ], 

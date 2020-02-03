@@ -1,12 +1,12 @@
 import React from 'react'
 import LoginForm from './LoginForm'
 import { connect } from 'react-redux'
-import {loginUserThunk} from '../../redux/headerReducer'
+import {loginUserThunk, getCaptchaThunkCreator} from '../../redux/headerReducer'
 import { Redirect } from 'react-router-dom'
 
 const Login = (props) => {
    let getDataFromLoginForm = (data) => {
-      props.loginUser(data.email, data.password, data.rememberMe)
+      props.loginUserThunk(data.email, data.password, data.rememberMe, data.captchaSymbols)
    }
 
    if (props.isAuth) {
@@ -15,7 +15,7 @@ const Login = (props) => {
 
    return (
       <div>
-         <LoginForm onSubmit = {getDataFromLoginForm} />
+         <LoginForm getCaptchaThunkCreator = {props.getCaptchaThunkCreator} captchaUrl = {props.captchaUrl} onSubmit = {getDataFromLoginForm} />
       </div>
    )
 }
@@ -23,16 +23,9 @@ const Login = (props) => {
 const mapStateToProps = (state) => {
    return {
       isAuth: state.header.isAuth, 
-      id: state.header.id
+      id: state.header.id,
+      captchaUrl: state.header.captchaUrl
    }
 }
 
-const mapDispatchToProps = (dispatch) => {
-   return {
-      loginUser: (email, password, rememberMe) => {
-         dispatch(loginUserThunk(email, password, rememberMe))
-      }
-   }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(Login)
+export default connect(mapStateToProps,{loginUserThunk, getCaptchaThunkCreator})(Login)

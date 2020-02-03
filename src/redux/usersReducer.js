@@ -1,4 +1,5 @@
 import {usersAPI} from '../components/api/requests'
+import {mapMethod} from '../components/common/MapMethod'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -23,24 +24,14 @@ const userReducer = (state = initialState, action) => {
       case FOLLOW: {
          return {
             ...state,
-            users: state.users.map(user => {
-               if (user.id === action.userId) {
-                  user.followed = true
-               }
-               return user
-            })
+            users: mapMethod(state.users, 'id', action.userId, {followed: true})
          }
       }
 
       case UNFOLLOW: {
          return {
             ...state,
-            users: state.users.map(user => {
-               if (user.id === action.userId) {
-                  user.followed = false
-               }
-               return user
-            })
+            users: mapMethod(state.users, 'id', action.userId, {followed: false})
          }
       }
 
@@ -85,37 +76,30 @@ export const setTotalCountAC = (totalCount) => ({type: TOTAL_COUNT, totalCount})
 export const setLoadingFlagAC = (loadingFlag) => ({type: LOADING, loadingFlag})
 export const tryFollowAC = (TFBool, userId) => ({type: TRY_FOLLOW, TFBool, userId})
 
-export const getUsersTnunkCreator = (usersOnPage, currentPage) => (dispatch) => {
+export const getUsersTnunkCreator = (usersOnPage, currentPage) => async (dispatch) => {
    dispatch(setLoadingFlagAC(true))
-   usersAPI.getUsersFromServer(usersOnPage, currentPage)
-      .then(response => {
-         dispatch(changePageAC(currentPage))
-         dispatch(setTotalCountAC(response.data.totalCount))
-         dispatch(setUsersAC(response.data.items))
-         dispatch(setLoadingFlagAC(false))
-      })
+   const response = await usersAPI.getUsersFromServer(usersOnPage, currentPage)
+   dispatch(changePageAC(currentPage))
+   dispatch(setTotalCountAC(response.data.totalCount))
+   dispatch(setUsersAC(response.data.items))
+   dispatch(setLoadingFlagAC(false))
 }
 
-export const UnfollowUserThunkCreator = (userId) => (dispatch) => {
+const FlowFollowUnfollow = async (dispatch, apiMethod, userId, actionSet) => {
    dispatch(tryFollowAC(true, userId))
-   usersAPI.toUnfollowUserRequest(userId)
-      .then(response => {
-         if (response.data.resultCode === 0) {
-            dispatch(unFollowAC(userId))
-            dispatch(tryFollowAC(false, userId))
-         }
-      })
+   const response = await apiMethod(userId)
+   if (response.data.resultCode === 0) {
+      dispatch(actionSet(userId))
+      dispatch(tryFollowAC(false, userId))
+   }
 }
 
-export const FollowUserThunkCreator = (userId) => (dispatch) => {
-   dispatch(tryFollowAC(true, userId))
-   usersAPI.startFollowUserRequest(userId)
-      .then(response => {
-         if (response.data.resultCode === 0) {
-            dispatch(followAC(userId))
-            dispatch(tryFollowAC(false, userId))
-         }
-      })
+export const UnfollowUserThunkCreator = (userId) => async (dispatch) => {
+   FlowFollowUnfollow(dispatch, usersAPI.startUnfollowUserRequest.bind(usersAPI), userId, unFollowAC)
+}
+
+export const FollowUserThunkCreator = (userId) => async (dispatch) => {
+   FlowFollowUnfollow(dispatch, usersAPI.startFollowUserRequest.bind(usersAPI), userId, followAC)
 }
 
 export default userReducer

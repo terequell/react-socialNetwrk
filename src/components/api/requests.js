@@ -25,7 +25,7 @@ export const usersAPI = {
          samuraiAPI.post(`follow/${userId}`)
       )
    },
-   toUnfollowUserRequest(userId) {
+   startUnfollowUserRequest(userId) {
       return (
          samuraiAPI.delete(`follow/${userId}`)
       )
@@ -51,7 +51,25 @@ export const profileAPI = {
             status: status
          })
       )
-   }  
+   },
+   
+   setPhoto(photo) {
+      const formData = new FormData();
+      formData.append('image', photo)
+      return (
+         samuraiAPI.put('profile/photo', formData, {
+            headers: {
+               'Content-Type': 'multipart/form-data'
+            }
+         })
+      )
+   },
+
+   setNewInfo(newInfo) {
+      return (
+         samuraiAPI.put('profile', newInfo)
+      )
+   }
 }
 
 export const authAPI = {
@@ -61,10 +79,10 @@ export const authAPI = {
       )
    },
 
-   logIn(email, password, rememberMe) {
+   logIn(email, password, rememberMe, captcha) {
       return (
          samuraiAPI.post('auth/login', {
-            email, password, rememberMe
+            email, password, rememberMe, captcha
          })
       )
    }, 
@@ -73,5 +91,36 @@ export const authAPI = {
       return (
          samuraiAPI.post('auth/logout')
       )
+   },
+
+   getCaptcha() {
+      return (
+         samuraiAPI.get('security/get-captcha-url')
+      )
    }
+}
+
+export const dialogsAPI = {
+   getUserDialogs() {
+      return (
+         samuraiAPI.get('dialogs')
+      )
+   },
+   startDialog(userId) {
+      return (
+         samuraiAPI.put(`dialogs/${userId}`)
+      )
+   },
+   getMessagesWithUser(userId) {
+      return (
+         samuraiAPI.get(`dialogs/${userId}/messages`)
+      )
+   },
+   sendNewMessageToUser(userId, body) {
+      return (
+         samuraiAPI.post(`dialogs/${userId}/messages`, {
+            body
+         }) 
+      )
+   },
 }

@@ -1,29 +1,16 @@
 import React from 'react';
 import styles from './Messages.module.css'
 import MessagesUser from './MessagesUser';
-import MessageItem from './MessageItem';
-import AddMessageForm from './MessagesForms'
-
 
 
 const Messages = (props) => {
-   let messagesData = props.messagesPage.messagesData.map(element => <MessagesUser name={element.name} key={element.id}/>);
-   let messagesElements = props.messagesPage.messagesElements.map(message => <MessageItem message = {message.item} key = {message.id}/>);
-
-   let getNewMessage = (formData) => {
-      props.onAddMessage(formData.newMessage)
-   }
+   const messagesData = props.dialogs.map(element => <MessagesUser name={element.userName} id = {element.id} key={element.id} hasNewMessages={element.hasNewMessages} photo = {element.photos.small}/>);
 
    return (
       <div className = {styles.messages}>
-         <div className = {styles.peoples}>
+         <div className = {styles.users__list}>
+         <h1 className = {styles.dialog__name}>My dialogs:</h1>
             {messagesData}
-         </div>   
-         <div className = {styles.textOfMessages}>
-            {messagesElements}
-            <div>
-               <AddMessageForm   onSubmit = {getNewMessage}/>
-            </div>
          </div>
       </div>
    )

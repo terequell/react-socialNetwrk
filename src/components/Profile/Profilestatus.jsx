@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 
 const Profilestatus = React.memo((props) => {
-   console.log('RENDERED')
    let [editMode, setEditMode] = useState(false)
    let [currentStatus, setCurrentStatus] = useState('')
 
